@@ -16,6 +16,6 @@ resource "aws_instance" "app_server" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "Terraform-bata-jenkins-hudai-baneko-instance"
+    Name = "Local-jenkins bata launch gareko instance"
   }
 }
