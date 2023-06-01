@@ -21,7 +21,7 @@ jobs:
 
       - name: Update versions.tfvars
         run: |
-          sed -i "s/first_report_tag=\".*\"/first_report_tag = \"$GITHUB_SHA\"/" version.tfvars
+          sed -i "s/first_report_tag=\".*\"/first_report_tag=\"$GITHUB_SHA\"/" version.tfvars
           git add version.tfvars
           git config --global user.name '${{ secrets.USER_NAME }}'
           git config --global user.email '${{ secrets.USER_EMAIL }}'
