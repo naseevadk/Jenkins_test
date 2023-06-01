@@ -35,4 +35,3 @@ jobs:
           commit-message: Update versions.tfvars with commit hash
           title: Update versions.tfvars with commit hash
           branch: main
-          branch-suffix: pipeline
