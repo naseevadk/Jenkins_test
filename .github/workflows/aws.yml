@@ -34,4 +34,5 @@ jobs:
           token: ${{ secrets.PAT }}
           commit-message: Update versions.tfvars with commit hash
           title: Update versions.tfvars with commit hash
+          draft: true
           branch: main
