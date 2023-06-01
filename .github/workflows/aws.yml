@@ -1,0 +1,37 @@
+name: Update versions.tfvars and Create Pull Request
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-versions-tfvars:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout First Repository
+        uses: actions/checkout@v2
+
+      - name: Checkout Second Repository
+        uses: actions/checkout@v2
+        with:
+          repository: naseevadk/terraform-version-test
+          ref: pipeline
+
+      - name: Update versions.tfvars
+        run: |
+          sed -i "s/first_report_hash = \".*\"/first_report_tag = \"$GITHUB_SHA\"/" version.tfvars
+          git add version.tfvars
+          git config --global user.name '${{ secrets.USER_NAME }}'
+          git config --global user.email '${{ secrets.USER_EMAIL }}'
+          git commit -m 'Update versions.tfvars with commit hash'
+          git push origin pipeline
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update versions.tfvars with commit hash
+          title: Update versions.tfvars with commit hash
+          branch: main
+          branch-suffix: pipeline
